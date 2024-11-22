@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Generate Reports";
+    var report = ViewData["Report"] as List<dynamic>;
+}
+
+<h2>Approved Claims Report</h2>
+
+@if (report == null || !report.Any())
+{
+    <div class="alert alert-warning">No approved claims found.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Claim ID</th>
+                <th>Date Claimed</th>
+                <th>Lecturer Name</th>
+                <th>Hours Worked</th>
+                <th>Hourly Rate</th>
+                <th>Status</th>
+                <th>Total Payment</th>
+                <th>Supporting Documents</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in report)
+            {
+                <tr>
+                    <td>@claim.Id</td>
+                    <td>@claim.DateClaimed.ToString("MM/dd/yyyy")</td>
+                    <td>@claim.LecturerName</td>
+                    <td>@claim.HoursWorked</td>
+                    <td>@claim.HourlyRate.ToString("C")</td>
+                    <td>@claim.Status</td>
+                    <td>@claim.TotalPayment.ToString("C")</td>
+                    <td>
+                        @if (claim.SupportingDocuments.Any())
+                        {
+                            @foreach (var doc in claim.SupportingDocuments)
+                            {
+                                <a href="@Url.Content("/Documents/" + doc)" download="@doc" class="btn btn-link">
+                                    @doc
+                                </a>
+                            }
+                        }
+                        else
+                        {
+                            <span>No Documents</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<div class="mt-3">
+    <a href="@Url.Action("DownloadReport", "HR")" class="btn btn-primary">Download Report (CSV)</a>
+</div>
+
+
+<div class="mt-3">
+    <a href="/HR/HRDashboard" class="btn btn-secondary">Back to HR Dashboard</a>
+</div>

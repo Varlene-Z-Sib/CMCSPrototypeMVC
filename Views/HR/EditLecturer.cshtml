@@ -1,11 +1,8 @@
-﻿@using CMCSPrototypeMVC.Models
-@model CMCSPrototypeMVC.Models.Lecturer
-
-@{
-    ViewData["Title"] = "Add Lecturer";
+﻿@{
+    ViewData["Title"] = "Edit Lecturer";
 }
 
-<h2>Add Lecturer</h2>
+<h2>Edit Lecturer</h2>
 
 @if (TempData["ErrorMessage"] != null)
 {
@@ -21,17 +18,17 @@
     </div>
 }
 
-<form method="post" action="/HR/AddLecturer">
+<form method="post" action="/HR/EditLecturer/@Model.Id">
     <div class="form-group">
         <label for="name">Lecturer Name</label>
-        <input type="text" id="name" name="name" class="form-control" required />
+        <input type="text" id="name" name="name" class="form-control" value="@Model.Name" required />
     </div>
     <div class="form-group">
         <label for="contactInfo">Contact Information</label>
-        <input type="text" id="contactInfo" name="contactInfo" class="form-control" required />
+        <input type="text" id="contactInfo" name="contactInfo" class="form-control" value="@Model.ContactInfo" required />
     </div>
 
-    <button type="submit" class="btn btn-primary">Add Lecturer</button>
+    <button type="submit" class="btn btn-primary">Update Lecturer</button>
 </form>
 
 <div class="mt-3">

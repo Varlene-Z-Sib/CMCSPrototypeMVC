@@ -13,7 +13,7 @@ namespace CMCSPrototypeMVC.Controllers
     [Authorize]
     public class ClaimsController : Controller
     {
-        private static List<Claim> claims = new List<Claim>(); // Store claims in memory for now
+        public static List<Claim> claims = new List<Claim>(); // Store claims in memory for now
         private readonly IValidator<Claim> _claimValidator;
 
         public ClaimsController(IValidator<Claim> claimValidator)

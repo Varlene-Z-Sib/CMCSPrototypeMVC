@@ -1,12 +1,12 @@
-﻿@page
-@model ViewClaimsModel
+﻿@model List<CMCSPrototypeMVC.Models.Claim>
+
 @{
     ViewData["Title"] = "View Claims";
 }
 
-<h1>View Claims</h1>
+<h1>Claims List</h1>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Lecturer Name</th>
@@ -14,17 +14,19 @@
             <th>Hourly Rate</th>
             <th>Total Payment</th>
             <th>Status</th>
+            <th>Notes</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var claim in Model.Claims)
+        @foreach (var claim in Model)
         {
             <tr>
                 <td>@claim.LecturerName</td>
                 <td>@claim.HoursWorked</td>
-                <td>@claim.HourlyRate</td>
+                <td>@claim.HourlyRate.ToString("C")</td>
                 <td>@claim.TotalPayment.ToString("C")</td>
-                <td>@(claim.StatusId == 2 ? "Approved" : "Pending")</td>
+                <td>@claim.Status</td>
+                <td>@claim.Notes</td>
             </tr>
         }
     </tbody>

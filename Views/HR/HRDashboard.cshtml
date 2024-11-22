@@ -1,20 +1,20 @@
-﻿@page
-@model HRDashboardModel
-@{
+﻿@{
     ViewData["Title"] = "HR Dashboard";
 }
 
 <h1>HR Dashboard</h1>
 
+<p>Total Lecturers: @ViewBag.TotalLecturers</p>
+<p>Total Claims: @ViewBag.TotalClaims</p>
+<p>Approved Claims: @ViewBag.ApprovedClaims</p>
+<p>Pending Claims: @ViewBag.PendingClaims</p>
+
 <!-- Navigation for HR tasks -->
 <ul>
-    <li><a href="/ManageClaims">Manage Claims</a></li>
-    <li><a href="/ManageLecturers">Manage Lecturers</a></li>
-    <li><a href="/GenerateReports">Generate Reports</a></li>
+    <li><a href="/HR/ViewClaims">Review Claims</a></li> <!-- Navigate to the Review Claims page -->
+    <li><a href="/HR/ManageLecturers">Manage Lecturers</a></li>
+    <li><a href="/HR/AddLecturer">Add Lecturer</a></li>
+    <li><a href="/HR/GenerateReports">Generate Reports</a></li>
+    <li> <a href="/Claims/ReviewClaims">Back</a></li>
+    
 </ul>
-<nav>
-    <ul>
-        <li><a href="/HR/ViewClaims">View Claims</a></li>
-        <li><a href="/HR/ManageLecturers">Manage Lecturers</a></li>
-    </ul>
-</nav>

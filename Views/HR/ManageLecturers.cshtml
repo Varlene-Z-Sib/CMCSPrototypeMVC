@@ -1,46 +1,47 @@
-﻿@page
-@model ManageLecturersModel
+﻿@model List<CMCSPrototypeMVC.Models.Lecturer>
+
 @{
     ViewData["Title"] = "Manage Lecturers";
 }
 
-<h1>Manage Lecturers</h1>
+<h2>Manage Lecturers</h2>
 
-<table class="table">
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<table class="table table-striped">
     <thead>
         <tr>
-            <th>Lecturer Name</th>
+            <th>ID</th>
+            <th>Name</th>
             <th>Contact Info</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var lecturer in Model.Lecturers)
+        @foreach (var lecturer in Model)
         {
             <tr>
+                <td>@lecturer.Id</td>
                 <td>@lecturer.Name</td>
-                <td><input type="text" value="@lecturer.ContactInfo" id="contact-@lecturer.Id" /></td>
+                <td>@lecturer.ContactInfo</td>
                 <td>
-                    <button onclick="updateLecturer(@lecturer.Id)">Update</button>
+                    <!-- You can add options like Edit, Delete for lecturers here -->
+                    <a href="/HR/EditLecturer/@lecturer.Id" class="btn btn-warning">Edit</a>
+                    <a href="/HR/DeleteLecturer/@lecturer.Id" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<script>
-    async function updateLecturer(id) {
-        const contactInfo = document.getElementById(`contact-${id}`).value;
-        const response = await fetch('/HR/UpdateLecturer', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id, contact: contactInfo })
-        });
-
-        if (response.ok) {
-            alert("Lecturer updated successfully!");
-        } else {
-            alert("Error updating lecturer.");
-        }
-    }
-</script>
+<div class="mt-3">
+    <a href="/HR/AddLecturer" class="btn btn-primary">Add New Lecturer</a>
+</div>
+<div class="mt-3">
+    <a href="/HR/HRDashboard" class="btn btn-primary">Back</a>
+</div>
