@@ -1,0 +1,184 @@
+﻿@model List<CMCSPrototypeMVC.Models.Claim>
+
+@{
+    ViewData["Title"] = "Review Claims";
+}
+
+<style>
+    /* Internal styling for Review Claims */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    h2 {
+        color: #ff6600;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .table-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 0 auto;
+        max-width: 1000px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #ff6600;
+        color: white;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    a {
+        color: #ff6600;
+        text-decoration: none;
+    }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        padding: 5px 10px;
+        color: white;
+        border-radius: 4px;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        padding: 5px 10px;
+        color: white;
+        border-radius: 4px;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+    .btn-secondary {
+        background-color: #333;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .btn-secondary:hover {
+            background-color: #555;
+        }
+
+    .mt-3 {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning text-center">
+        No claims available for review.
+    </div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date Claimed</th>
+                <th>Lecturer Name</th>
+                <th>Hours Worked</th>
+                <th>Hourly Rate</th>
+                <th>Status</th>
+                <th>Document Name</th>
+                <th>Total Payment</th> <!-- New Column -->
+                <th>Actions</th> <!-- Actions Column -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var claim in Model)
+            {
+                <tr class="@((TempData["ErrorClaimId"] != null && (int)TempData["ErrorClaimId"] == claim.Id) ? "table-danger" : "")">
+                    <td>@claim.Id</td>
+                    <td>@claim.DateClaimed.ToString("MM/dd/yyyy")</td>
+                    <td>@claim.LecturerName</td>
+                    <td>@claim.HoursWorked</td>
+                    <td>@claim.HourlyRate.ToString("C")</td>
+                    <td>
+                        @(claim.StatusId == 3 ? "Pending" :
+                            claim.StatusId == 2 ? "Approved" :
+                            claim.StatusId == 1 ? "Rejected" : "Unknown")
+                    </td>
+                    <td>
+                        @if (claim.SupportingDocuments.Any())
+                        {
+                            @foreach (var doc in claim.SupportingDocuments)
+                            {
+                                <div>
+                                    <a href="@Url.Content(doc.FilePath)" download="@doc.FileName" class="btn btn-link">
+                                        @doc.FileName
+                                    </a>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <span>No Documents</span>
+                        }
+                    </td>
+                    <td>@claim.TotalPayment.ToString("C")</td> <!-- Display Total Payment -->
+                    <td>
+                        @if (claim.StatusId == 2)
+                        {
+                            @* <!-- Approve -->
+                            @using (Html.BeginForm("ApproveClaim", "Claims", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@claim.Id" />
+                                <button type="submit" class="btn btn-success">Approve</button>
+                            }*@
+
+                            <!-- Reject -->
+                            @using (Html.BeginForm("RejectClaim", "Claims", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@claim.Id" />
+                                <button type="submit" class="btn btn-danger">Reject</button>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+<div class="mt-3">
+    <a href="/" class="btn btn-secondary">Back to Home</a>
+</div>

@@ -1,0 +1,39 @@
+/* Example CSS for applying light bright orange theme */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar-brand {
+    color: #FFA500 !important; /* Light bright orange */
+}
+
+.nav-link {
+    color: #FFA500 !important; /* Light bright orange */
+}
+
+    .nav-link:hover {
+        color: #FF8C00 !important; /* Darker orange on hover */
+    }
+
+.btn-primary {
+    background-color: #FFA500;
+    border-color: #FFA500;
+    color: white;
+}
+
+    .btn-primary:hover {
+        background-color: #FF8C00;
+        border-color: #FF8C00;
+    }
+
+h1, h2, h3, h4 {
+    color: #FFA500;
+}
+
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
