@@ -1,4 +1,99 @@
-﻿@{
+﻿<style>
+    /* Internal styling for Edit Lecturer page */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+    }
+
+    h2 {
+        color: #ff6600;
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    .alert-success, .alert-danger {
+        padding: 15px;
+        border-radius: 5px;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
+        color: #721c24;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    input.form-control {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 100%;
+        font-size: 14px;
+    }
+
+        input.form-control:focus {
+            border-color: #ff6600;
+            box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+        }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        display: inline-block;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        padding: 10px 20px;
+        color: white;
+        border-radius: 5px;
+        display: inline-block;
+        margin-top: 20px;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #4e555b;
+        }
+
+    .mt-3 {
+        text-align: center;
+        margin-top: 30px;
+    }
+</style>
+
+@{
     ViewData["Title"] = "Edit Lecturer";
 }
 
