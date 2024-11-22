@@ -1,5 +1,20 @@
-﻿<h1>HR Dashboard</h1>
+﻿@page
+@model HRDashboardModel
+@{
+    ViewData["Title"] = "HR Dashboard";
+}
+
+<h1>HR Dashboard</h1>
+
+<!-- Navigation for HR tasks -->
 <ul>
-    <li><a asp-action="ManageLecturers" asp-controller="Lecturers">Manage Lecturers</a></li>
-    <li><a asp-action="AddLecturer" asp-controller="Lecturers">Add New Lecturer</a></li>
+    <li><a href="/ManageClaims">Manage Claims</a></li>
+    <li><a href="/ManageLecturers">Manage Lecturers</a></li>
+    <li><a href="/GenerateReports">Generate Reports</a></li>
 </ul>
+<nav>
+    <ul>
+        <li><a href="/HR/ViewClaims">View Claims</a></li>
+        <li><a href="/HR/ManageLecturers">Manage Lecturers</a></li>
+    </ul>
+</nav>

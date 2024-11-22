@@ -1,26 +1,46 @@
-﻿<h1>Manage Lecturers</h1>
-<table>
+﻿@page
+@model ManageLecturersModel
+@{
+    ViewData["Title"] = "Manage Lecturers";
+}
+
+<h1>Manage Lecturers</h1>
+
+<table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Address</th>
+            <th>Lecturer Name</th>
+            <th>Contact Info</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var lecturer in Model)
+        @foreach (var lecturer in Model.Lecturers)
         {
             <tr>
                 <td>@lecturer.Name</td>
-                <td>@lecturer.Email</td>
-                <td>@lecturer.Phone</td>
-                <td>@lecturer.Address</td>
+                <td><input type="text" value="@lecturer.ContactInfo" id="contact-@lecturer.Id" /></td>
                 <td>
-                    <a asp-action="EditLecturer" asp-route-id="@lecturer.Id">Edit</a>
+                    <button onclick="updateLecturer(@lecturer.Id)">Update</button>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<script>
+    async function updateLecturer(id) {
+        const contactInfo = document.getElementById(`contact-${id}`).value;
+        const response = await fetch('/HR/UpdateLecturer', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, contact: contactInfo })
+        });
+
+        if (response.ok) {
+            alert("Lecturer updated successfully!");
+        } else {
+            alert("Error updating lecturer.");
+        }
+    }
+</script>
