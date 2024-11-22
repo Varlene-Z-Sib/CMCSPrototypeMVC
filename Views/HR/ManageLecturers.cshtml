@@ -1,0 +1,26 @@
+﻿<h1>Manage Lecturers</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var lecturer in Model)
+        {
+            <tr>
+                <td>@lecturer.Name</td>
+                <td>@lecturer.Email</td>
+                <td>@lecturer.Phone</td>
+                <td>@lecturer.Address</td>
+                <td>
+                    <a asp-action="EditLecturer" asp-route-id="@lecturer.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
